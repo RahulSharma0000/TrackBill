@@ -2,9 +2,9 @@ import React from "react";
 
 const Nav = () => {
   return (
-    <div className="flex flex-col  justify-center h-[45vh] bg-white px-10 pb-10 gap-4 m-0">
+    <div className="flex flex-col  justify-center h-[45vh] bg-white  pb-10 gap-4 m-0">
       <div className="flex justify-between items-center w-full">
-        <h1 className="text-2xl text-blue-600 font-bold ">TrackBill</h1>
+        <h1 className="text-2xl text-blue-600 font-bold "> <img className="w-6" src="/public/Logo.jpg" alt="" /> TrackBill</h1>
         <div className="flex gap-10 font-medium">
           <h1>Dashboard</h1>
           <h1>Add Expenses</h1>
