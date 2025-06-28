@@ -1,11 +1,14 @@
 import React from 'react'
+import AddReciepts from './pages/addReciepts'
 
 const App = () => {
   return (
     <div>
-      <h1 className='text-5xl'>hello</h1>
+     <AddReciepts /> 
+
     </div>
   )
 }
 
 export default App
+
