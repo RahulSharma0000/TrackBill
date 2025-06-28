@@ -1,7 +1,7 @@
 import React from "react";
-import DragDropImage from "../components/DragDropImage";
+import DragDropImage from "../Component/DragDropImage";
 
-const AddReciepts = () => {
+const AddReceipts = () => {
   return (
     <div className="flex items-center justify-center h-screen w-auto ">
       <form
@@ -47,7 +47,7 @@ const AddReciepts = () => {
           name="note"
           id="note"
           cols="10"
-          rows="5"
+          rows="3"
           placeholder="Enter any additional notes"
         ></textarea>
         <DragDropImage />
@@ -58,4 +58,4 @@ const AddReciepts = () => {
   );
 };
 
-export default AddReciepts;
+export default AddReceipts;
