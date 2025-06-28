@@ -1,16 +1,19 @@
 import React from 'react'
-import AddReceipts from './Pages/AddReceipts'
-import Nav from './Component/Nav'
-import DashBoard from './Pages/DashBoard'
-import Receipt from './Pages/Receipt'
+import AddReceipts from './pages/AddReceipts'
+import Nav from './components/Nav'
+import DashBoard from './pages/DashBoard'
+import Receipt from './pages/Receipt'
 import{Route ,Routes} from "react-router-dom"
 
-import Routing from './Utils/Routing'
+import Routing from './utils/Routing'
 const App = () => {
   return (
-    <div className=' px-20 py-8'>
-      <Nav/> 
-      <Routing/>
+    <div className=' px-20'>
+      {/* <Nav/> */}
+      {/* <DashBoard/>
+    
+      <AddReceipts/> */}
+<Routing/>  
     </div>
   )
 }

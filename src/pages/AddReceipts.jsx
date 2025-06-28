@@ -1,5 +1,5 @@
 import React from "react";
-import DragDropImage from "../Component/DragDropImage";
+import DragDropImage from "../components/DragDropImage";
 
 const AddReceipts = () => {
   return (
