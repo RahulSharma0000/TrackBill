@@ -48,7 +48,7 @@ const DashBoard = () => {
   const barData = showWeekly ? barDataWeekly : barDataMonthly;
 
   return (
-    <div className=" max-w-screen-xl ">
+    <div className="mx-auto">
     
 
       {/* Summary Cards */}
