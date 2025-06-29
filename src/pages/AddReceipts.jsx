@@ -7,11 +7,14 @@ const AddReceipts = () => {
   const [category, setCategory] = useState("food");
   const [date, setDate] = useState("");
   const [note, setNote] = useState("");
+  const [file, setFile] = useState(null);
   const [image, setImage] = useState("https://via.placeholder.com/150");
 
   const handleImageUpload = (e) => {
     const file = e.target.files[0];
     if (!file) return;
+
+    setFile(file);
 
     const reader = new FileReader();
     reader.onloadend = () => {
@@ -35,21 +38,22 @@ const AddReceipts = () => {
 
     addReceipt(newReceipt);
 
-    // Clear form
+    // Reset form
     setTitle("");
     setAmount("");
     setCategory("food");
     setDate("");
     setNote("");
     setImage("https://via.placeholder.com/150");
+    setFile(null);
     alert("Receipt added!");
   };
 
   return (
-    <div className="flex justify-center items-center h-screen">
+    <div className="flex justify-center items-center min-h-screen bg-gray-50 m-0">
       <form
         onSubmit={handleSubmit}
-        className="flex flex-col gap-2 p-5 shadow-md bg-white rounded w-[90%] max-w-md"
+        className="flex flex-col gap-2 p-10 shadow-md bg-white rounded w-[90%] max-w-md"
       >
         <h2 className="text-2xl text-center font-bold text-blue-600 mb-4">
           Add Receipt
@@ -109,18 +113,11 @@ const AddReceipts = () => {
           className="border p-2 rounded"
         />
 
-        {/* 🖼️ Preview */}
-        {image && (
-          <img
-            src={image}
-            alt="Preview"
-            className="mt-2 h-32 w-full object-contain rounded border"
-          />
-        )}
+     
 
         <button
           type="submit"
-          className="bg-blue-600 text-white font-bold py-2 rounded mt-4"
+          className="bg-blue-600 text-white font-bold py-2 rounded mt-4 hover:bg-blue-700"
         >
           Add Receipt
         </button>
