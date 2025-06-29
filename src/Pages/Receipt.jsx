@@ -48,7 +48,7 @@ const Receipt = () => {
     className="flex items-center justify-between gap-4 p-4 shadow rounded bg-white mb-2"
   >
     {/* Icon + Info */}
-    <div className="flex items-center gap-4">
+    <div className="flex items-center gap-4 w-1/5">
       <i className={`${expense.iconClass} text-3xl text-blue-500 bg-blue-100 p-2 rounded-full`}></i>
       <div>
         <div className="font-semibold">{expense.category}</div>
@@ -57,10 +57,10 @@ const Receipt = () => {
     </div>
 
     {/* Amount */}
-    <div className="font-bold">${expense.amount.toFixed(2)}</div>
+    <div className="font-bold w-1/10">${expense.amount.toFixed(2)}</div>
 
     {/* Buttons */}
-    <div className="flex gap-2">
+    <div className="flex gap-2 ">
       <button className="bg-green-600 hover:bg-green-700 text-white px-3 py-1 rounded">
         View
       </button>
