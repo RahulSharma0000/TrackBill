@@ -5,6 +5,8 @@ import { getReceipts, deleteReceipt } from "../utils/LocalStorage";
 
 const Receipt = () => {
   const [receipts, setReceipts] = useState([]);
+  const [selectedImage, setSelectedImage] = useState(null);
+  const [isModalOpen, setIsModalOpen] = useState(false);
 
   useEffect(() => {
     setReceipts(getReceipts());
@@ -13,6 +15,16 @@ const Receipt = () => {
   const handleDelete = (id) => {
     deleteReceipt(id);
     setReceipts(getReceipts());
+  };
+
+  const openModal = (imageUrl) => {
+    setSelectedImage(imageUrl);
+    setIsModalOpen(true);
+  };
+
+  const closeModal = () => {
+    setIsModalOpen(false);
+    setSelectedImage(null);
   };
 
   const categoryIcons = {
@@ -24,22 +36,6 @@ const Receipt = () => {
   };
 
   return (
-<<<<<<< HEAD
-    <div >
-      <h2 className='flex items-center justify-center text-3xl font-bold text-blue-500 my-5'>Recent Receipts </h2>
-      {expenses.map((expense, index) => (
-  <div
-    key={index}
-    className="flex items-center justify-between gap-4 p-4 shadow rounded bg-white mb-2"
-  >
-    {/* Icon + Info */}
-    <div className="flex items-center gap-4 w-1/5">
-      <i className={`${expense.iconClass} text-3xl text-blue-500 bg-blue-100 p-2 rounded-full`}></i>
-      <div>
-        <div className="font-semibold">{expense.category}</div>
-        <div className="text-sm text-gray-500">{expense.date}</div>
-      </div>
-=======
     <div>
       <h2 className="flex items-center justify-center text-3xl font-bold text-blue-500 my-5">
         Recent Receipts
@@ -71,7 +67,10 @@ const Receipt = () => {
 
             {/* Buttons */}
             <div className="flex gap-2">
-              <button className="bg-green-600 hover:bg-green-700 text-white px-3 py-1 rounded">
+              <button
+                onClick={() => openModal(receipt.image)}
+                className="bg-green-600 hover:bg-green-700 text-white px-3 py-1 rounded"
+              >
                 View
               </button>
               <button
@@ -84,36 +83,27 @@ const Receipt = () => {
           </div>
         ))
       )}
->>>>>>> dbf9423f1f30011b17569b08b43cf588f3ad6edf
+
+      {/* Image Modal */}
+      {isModalOpen && (
+        <div className="fixed inset-0 bg-black bg-opacity-50 flex justify-center items-center z-50">
+          <div className="bg-white p-4 rounded-lg shadow-md relative w-[90%] max-w-md">
+            <button
+              onClick={closeModal}
+              className="absolute top-2 right-3 text-xl text-gray-500 hover:text-red-600"
+            >
+              &times;
+            </button>
+            <img
+              src={selectedImage}
+              alt="Receipt"
+              className="w-full h-auto rounded"
+            />
+          </div>
+        </div>
+      )}
     </div>
   );
 };
 
-<<<<<<< HEAD
-    {/* Amount */}
-    <div className="font-bold w-1/10">${expense.amount.toFixed(2)}</div>
-
-    {/* Buttons */}
-    <div className="flex gap-2 ">
-      <button className="bg-green-600 hover:bg-green-700 text-white px-3 py-1 rounded">
-        View
-      </button>
-      <button className="bg-red-600 hover:bg-red-700 text-white px-3 py-1 rounded">
-        Delete
-      </button>
-    </div>
-  </div>
-))}
-
-    </div>
-  )
-}
-
-export default Receipt
-
-
-
-
-=======
 export default Receipt;
->>>>>>> dbf9423f1f30011b17569b08b43cf588f3ad6edf
