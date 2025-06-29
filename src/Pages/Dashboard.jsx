@@ -49,7 +49,27 @@ const DashBoard = () => {
 
   return (
     <div className="mx-auto">
-    
+       <div>
+         <box className="bg-blue-500 h-20vh  w-full mb-2 rounded-xl flex flex-col items-start justify-cen
+         ter">
+        <h1 className="p-4 text-xl text-white font-semibold">Monthly Total</h1>
+        <h2 className=" m-2 p-2 text-2xl text-white font-semibold">₹12000</h2>
+      </box>
+      <dropList className=" h-10 w-full self-center mb-2 rounded-xl flex items-center justify-between gap-4 ">
+        <select className="border border-gray-300 rounded-md p-1 h-full w-1/3">
+          <option>June 2025</option>
+        </select>
+
+        <select className="border border-gray-300 rounded-md p-1 h-full w-1/3">
+          <option>Category</option>
+          <option>Option 2</option>
+        </select>
+
+        <select className="border border-gray-300 rounded-md p-1 h-full w-1/3">
+          <option>Search</option>
+        </select>
+      </dropList>
+       </div>
 
       {/* Summary Cards */}
       <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-20 mb-6">
