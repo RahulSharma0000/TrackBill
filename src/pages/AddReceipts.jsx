@@ -1,34 +1,82 @@
-import React from "react";
-import DragDropImage from "../components/DragDropImage";
+import React, { useState } from "react";
+import { addReceipt } from "../utils/LocalStorage";
 
 const AddReceipts = () => {
+  const [title, setTitle] = useState("");
+  const [amount, setAmount] = useState("");
+  const [category, setCategory] = useState("food");
+  const [date, setDate] = useState("");
+  const [note, setNote] = useState("");
+  const [image, setImage] = useState("https://via.placeholder.com/150");
+
+  const handleImageUpload = (e) => {
+    const file = e.target.files[0];
+    if (!file) return;
+
+    const reader = new FileReader();
+    reader.onloadend = () => {
+      setImage(reader.result); // base64 string
+    };
+    reader.readAsDataURL(file);
+  };
+
+  const handleSubmit = (e) => {
+    e.preventDefault();
+
+    const newReceipt = {
+      id: Date.now(),
+      title,
+      amount: parseFloat(amount),
+      category,
+      date,
+      note,
+      image
+    };
+
+    addReceipt(newReceipt);
+
+    // Clear form
+    setTitle("");
+    setAmount("");
+    setCategory("food");
+    setDate("");
+    setNote("");
+    setImage("https://via.placeholder.com/150");
+    alert("Receipt added!");
+  };
+
   return (
-    <div className="flex items-center justify-center h-screen w-auto ">
+    <div className="flex justify-center items-center h-screen">
       <form
-        action="submit"
-        className="flex flex-col  justify-center  my-10 p-5 shadow-md bg-[#fff] rounded"
+        onSubmit={handleSubmit}
+        className="flex flex-col gap-2 p-5 shadow-md bg-white rounded w-[90%] max-w-md"
       >
-        <h2 className="text-3xl text-center font-bold text-blue-500 m-4">
-          Add Reciepts
+        <h2 className="text-2xl text-center font-bold text-blue-600 mb-4">
+          Add Receipt
         </h2>
 
-        <h3 className="text-lg text-bold mb-1">Title</h3>
         <input
-          className="border-1 border-black rounded p-1 text-sm mb-2"
           type="text"
-          placeholder="Enter the Receipt Title"
+          placeholder="Title"
+          className="border p-2 rounded"
+          value={title}
+          onChange={(e) => setTitle(e.target.value)}
+          required
         />
-        <h3 className="text-lg text-bold mb-1">Amount</h3>
+
         <input
-          className="border-1 border-black rounded p-1 text-sm mb-2"
           type="number"
-          placeholder="₹"
+          placeholder="Amount"
+          className="border p-2 rounded"
+          value={amount}
+          onChange={(e) => setAmount(e.target.value)}
+          required
         />
-        <h3 className="text-lg text-bold mb-1">Category</h3>
+
         <select
-          className="border-1 rounded p-1 text-sm font-semibold mb-2"
-          name="category"
-          id="category"
+          className="border p-2 rounded"
+          value={category}
+          onChange={(e) => setCategory(e.target.value)}
         >
           <option value="food">Food</option>
           <option value="transport">Transport</option>
@@ -36,23 +84,46 @@ const AddReceipts = () => {
           <option value="entertainment">Entertainment</option>
           <option value="other">Other</option>
         </select>
-        <h3 className="text-lg text-bold mb-1">Date</h3>
+
         <input
-          className="border-1 rounded p-1 text-sm mb-2"
           type="date"
+          className="border p-2 rounded"
+          value={date}
+          onChange={(e) => setDate(e.target.value)}
+          required
         />
-        <h3 className="text-xl text-bold mb-1">Note</h3>
+
         <textarea
-          className="border-1 border-black rounded p-1 text-sm font-semibold mb-3"
-          name="note"
-          id="note"
-          cols="10"
+          placeholder="Note"
+          className="border p-2 rounded"
+          value={note}
+          onChange={(e) => setNote(e.target.value)}
           rows="3"
-          placeholder="Enter any additional notes"
-        ></textarea>
-        <DragDropImage />
-        <button className="bg-blue-500 p-2 rounded-full mt-1 text-xl font-bold text-white
-        ">Add</button>
+        />
+
+        {/* 📷 File Upload */}
+        <input
+          type="file"
+          accept="image/*"
+          onChange={handleImageUpload}
+          className="border p-2 rounded"
+        />
+
+        {/* 🖼️ Preview */}
+        {image && (
+          <img
+            src={image}
+            alt="Preview"
+            className="mt-2 h-32 w-full object-contain rounded border"
+          />
+        )}
+
+        <button
+          type="submit"
+          className="bg-blue-600 text-white font-bold py-2 rounded mt-4"
+        >
+          Add Receipt
+        </button>
       </form>
     </div>
   );
