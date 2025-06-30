@@ -83,7 +83,7 @@ const AddReceipts = () => {
           onChange={(e) => setCategory(e.target.value)}
         >
           <option value="food">Food</option>
-          <option value="transport">Transport</option>
+          <option value="travel">Travel</option>
           <option value="utilities">Utilities</option>
           <option value="entertainment">Entertainment</option>
           <option value="other">Other</option>
