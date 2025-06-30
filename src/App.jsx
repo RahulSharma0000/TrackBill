@@ -8,7 +8,7 @@ import { Route, Routes } from "react-router-dom";
 import Routing from "./utils/Routing";
 const App = () => {
   return (
-    <div className=" px-20">
+    <div >
       <Nav />
       <Routing />
     </div>

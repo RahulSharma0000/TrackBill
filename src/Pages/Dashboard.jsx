@@ -3,7 +3,6 @@ import {
   PieChart, Pie, Cell,
   BarChart, XAxis, YAxis, CartesianGrid, Bar, ResponsiveContainer, LabelList
 } from 'recharts';
-
 import { getReceipts } from '../utils/LocalStorage';
 
 const COLORS = ['#6366F1', '#F59E0B', '#10B981', '#EF4444'];
@@ -19,10 +18,8 @@ const DashBoard = () => {
   useEffect(() => {
     const allReceipts = getReceipts();
     const now = new Date();
-
     const weeklyStart = new Date(now);
     weeklyStart.setDate(now.getDate() - 6);
-
     const monthlyStart = new Date(now.getFullYear(), now.getMonth(), 1);
 
     let weekTotal = 0;
@@ -86,55 +83,56 @@ const DashBoard = () => {
   }, [showWeekly]);
 
   return (
-    <div className="mx-auto">
-      <div>
-        <div className="bg-blue-500 w-full mb-2 rounded-xl flex flex-col items-start justify-center">
-          <h1 className="p-4 text-xl text-white font-semibold">Monthly Total</h1>
-          <h2 className="m-2 p-2 text-2xl text-white font-semibold">₹{monthlyTotal.toLocaleString()}</h2>
-        </div>
-        <div className="h-10 w-full self-center mb-2 rounded-xl flex items-center justify-between gap-4">
-          <select className="border border-gray-300 rounded-md p-1 h-full w-1/3">
-            <option>June 2025</option>
-          </select>
-          <select className="border border-gray-300 rounded-md p-1 h-full w-1/3">
-            <option>Category</option>
-            <option>Option 2</option>
-          </select>
-          <select className="border border-gray-300 rounded-md p-1 h-full w-1/3">
-            <option>Search</option>
-          </select>
-        </div>
+    <div className="w-full "> {/* ✅ Center layout on all screens */}
+      {/* Header Card */}
+      <div className="bg-blue-500 w-full mb-4 rounded-xl flex flex-col items-start justify-center p-4 sm:p-6 shadow--md">
+        <h1 className="text-3xl sm:text-xl text-white font-semibold">Monthly Total</h1>
+        <h2 className="text-2xl sm:text-3xl text-white font-bold mt-2">
+          ₹{monthlyTotal.toLocaleString()}
+        </h2>
       </div>
 
-      <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-20 mb-6">
-        <div className="bg-white rounded-2xl shadow-md p-6 text-center sm:text-left">
+
+    
+      {/* Summary Cards */}
+      <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-6 sm:gap-10 lg:gap-20 mb-6">
+        {/* ✅ Responsive grid with spacing adjustments */}
+        <div className="bg-white rounded-2xl shadow-md p-4 sm:p-6 text-center sm:text-left">
           <h2 className="text-sm font-semibold text-gray-500">Total Spend</h2>
-          <p className="text-2xl pt-2 font-bold text-indigo-600 mt-1">₹{totalSpend.toLocaleString()}</p>
+          <p className="text-2xl font-bold text-indigo-600 mt-2">
+            ₹{totalSpend.toLocaleString()}
+          </p>
         </div>
-        <div className="bg-white rounded-2xl shadow-md p-6 text-center sm:text-left">
+        <div className="bg-white rounded-2xl shadow-md p-4 sm:p-6 text-center sm:text-left">
           <h2 className="text-sm font-semibold text-gray-500">This Week</h2>
-          <p className="text-2xl pt-2 font-bold text-emerald-600 mt-1">₹{weeklyTotal.toLocaleString()}</p>
+          <p className="text-2xl font-bold text-emerald-600 mt-2">
+            ₹{weeklyTotal.toLocaleString()}
+          </p>
         </div>
-        <div className="bg-white rounded-2xl shadow-md p-6 text-center sm:text-left">
+        <div className="bg-white rounded-2xl shadow-md p-4 sm:p-6 text-center sm:text-left">
           <h2 className="text-sm font-semibold text-gray-500">This Month</h2>
-          <p className="text-2xl pt-2 font-bold text-yellow-600 mt-1">₹{monthlyTotal.toLocaleString()}</p>
+          <p className="text-2xl font-bold text-yellow-600 mt-2">
+            ₹{monthlyTotal.toLocaleString()}
+          </p>
         </div>
       </div>
 
-      <div className="grid grid-cols-1 lg:grid-cols-2 gap-6">
-        <div className="bg-white rounded-2xl shadow-md p-6">
+      {/* Chart Section */}
+      <div className="grid grid-cols-1 lg:grid-cols-2 gap-6 pb-20">
+        {/* Pie Chart Card */}
+        <div className="bg-white rounded-2xl shadow-md p-4 sm:p-6">
           <div className="flex items-center justify-between mb-4">
-            <h2 className="text-lg font-semibold text-gray-600">
+            <h2 className="text-base sm:text-lg font-semibold text-gray-600">
               {showWeekly ? 'Weekly Category-wise' : 'Monthly Category-wise'}
             </h2>
             <button
               onClick={() => setShowWeekly(!showWeekly)}
-              className="px-4 py-1 text-sm rounded-full bg-indigo-100 text-indigo-600 hover:bg-indigo-200 transition"
+              className="px-4 py-2 text-sm rounded-full bg-indigo-100 text-indigo-600 hover:bg-indigo-200 transition"
             >
               Switch to {showWeekly ? 'Monthly' : 'Weekly'}
             </button>
           </div>
-          <div className="w-full h-[300px]">
+          <div className="h-[250px] sm:h-[300px]"> {/* ✅ Responsive chart height */}
             <ResponsiveContainer width="100%" height="100%">
               <PieChart>
                 <Pie
@@ -155,11 +153,12 @@ const DashBoard = () => {
           </div>
         </div>
 
-        <div className="bg-white rounded-2xl shadow-md p-6">
-          <h2 className="text-lg font-semibold text-gray-600 mb-4 text-center lg:text-left">
+        {/* Bar Chart Card */}
+        <div className="bg-white rounded-2xl shadow-md p-4 sm:p-6">
+          <h2 className="text-base sm:text-lg font-semibold text-gray-600 mb-4 text-center lg:text-left">
             {showWeekly ? 'Weekly Expenses' : 'Monthly Expenses'}
           </h2>
-          <div className="w-full h-[300px]">
+          <div className="h-[250px] sm:h-[300px]"> {/* ✅ Responsive chart height */}
             <ResponsiveContainer width="100%" height="100%">
               <BarChart data={barData}>
                 <CartesianGrid strokeDasharray="3 3" />
