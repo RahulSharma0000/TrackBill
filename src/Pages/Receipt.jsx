@@ -2,6 +2,15 @@
 
 import React, { useEffect, useState } from "react";
 import { getReceipts, deleteReceipt } from "../utils/LocalStorage";
+import {
+  Utensils,        // 🍕 for food
+  Bus,             // 🚗 for transport
+  Lightbulb,       // 💡 for utilities
+  Gamepad2,        // 🎮 for entertainment
+  FileText   ,      // 🧾 for other
+  Eye, Trash2 
+} from "lucide-react";
+
 
 const Receipt = () => {
   const [receipts, setReceipts] = useState([]);
@@ -27,13 +36,14 @@ const Receipt = () => {
     setSelectedImage(null);
   };
 
-  const categoryIcons = {
-    food: "🍕",
-    transport: "🚗",
-    utilities: "💡",
-    entertainment: "🎮",
-    other: "🧾"
-  };
+const categoryIcons = {
+  food: <Utensils className="w-6 h-6 text-blue-500" />,
+  transport: <Bus className="w-6 h-6 text-blue-500" />,
+  utilities: <Lightbulb className="w-6 h-6 text-blue-500" />,
+  entertainment: <Gamepad2 className="w-6 h-6 text-blue-500" />,
+  other: <FileText className="w-6 h-6 text-blue-500" />
+};
+
 
   return (
     <div>
@@ -42,45 +52,57 @@ const Receipt = () => {
       </h2>
 
       {receipts.length === 0 ? (
-        <p className="text-center text-gray-500">No receipts found.</p>
+        <p className="px-4 sm:px-10 max-w-5xl mx-auto overflow-y-auto max-h-[80vh]">No receipts found.</p>
       ) : (
         receipts.map((receipt) => (
-          <div
-            key={receipt.id}
-            className="flex items-center justify-between gap-4 p-4 shadow rounded bg-white mx-6 my-3"
-          >
-            {/* Icon + Info */}
-            <div className="flex items-center gap-4">
-              <div className="w-12 h-12 bg-blue-100 text-2xl flex items-center justify-center rounded-full">
-                {categoryIcons[receipt.category] || "📄"}
-              </div>
-              <div>
-                <div className="font-semibold text-lg">{receipt.title}</div>
-                <div className="text-sm text-gray-500">
-                  {receipt.category} • {receipt.date}
-                </div>
-              </div>
-            </div>
+<div
+  key={receipt.id}
+  className="relative flex flex-col sm:flex-row sm:items-center justify-between gap-4 p-4 shadow rounded-lg bg-white mb-4 mx-4 sm:mx-10 transition-transform hover:scale-[1.01] hover:shadow-md"
+>
+  {/* 📦 Icon + Info */}
+  <div className="flex items-start gap-4 flex-1">
+    <div className="w-12 h-12 bg-blue-100 flex items-center justify-center rounded-full shrink-0">
+      {categoryIcons[receipt.category] || (
+        <FileText className="w-6 h-6 text-blue-500" />
+      )}
+    </div>
 
-            {/* Amount */}
-            <div className="font-bold text-green-600 text-lg">₹ {receipt.amount}</div>
+    <div className="flex flex-col gap-1">
+      <span className="font-bold text-2xl text-gray-800 pb-2">{receipt.title}</span>
+      <span className="inline-block bg-blue-100 text-blue-600 text-xs font-bold px-2 py-0.5 rounded w-fit pb-2">
+        {receipt.category}
+      </span>
+      <span className="text-sm text-gray-500">{receipt.date}</span>
+    </div>
+  </div>
 
-            {/* Buttons */}
-            <div className="flex gap-2">
-              <button
-                onClick={() => openModal(receipt.image)}
-                className="bg-green-600 hover:bg-green-700 text-white px-3 py-1 rounded"
-              >
-                View
-              </button>
-              <button
-                onClick={() => handleDelete(receipt.id)}
-                className="bg-red-600 hover:bg-red-700 text-white px-3 py-1 rounded"
-              >
-                Delete
-              </button>
-            </div>
-          </div>
+  {/* 💰 Amount — top-right on mobile */}
+  <div className="absolute right-4 top-4 sm:static sm:text-right">
+    <p className="text-green-600 font-bold text-lg whitespace-nowrap">
+      ₹ {receipt.amount.toLocaleString()}
+    </p>
+  </div>
+
+  {/* 🔘 Buttons */}
+  <div className="flex justify-between sm:justify-start gap-4 w-full sm:w-auto pt-2 sm:pt-0">
+    <button
+      onClick={() => openModal(receipt.image)}
+      className="p-2 rounded-full bg-blue-100 hover:bg-blue-200 transition"
+      title="View"
+    >
+      <Eye className="w-5 h-5 text-blue-600" />
+    </button>
+    <button
+      onClick={() => handleDelete(receipt.id)}
+      className="p-2 rounded-full bg-red-100 hover:bg-red-200 transition"
+      title="Delete"
+    >
+      <Trash2 className="w-5 h-5 text-red-600" />
+    </button>
+  </div>
+</div>
+
+
         ))
       )}
 
@@ -97,7 +119,7 @@ const Receipt = () => {
             <img
               src={selectedImage}
               alt="Receipt"
-              className="w-full h-auto rounded"
+              className="w-full h-auto max-h-[70vh] object-contain rounded"
             />
           </div>
         </div>

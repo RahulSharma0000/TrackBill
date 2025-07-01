@@ -8,10 +8,10 @@ import { Route, Routes } from "react-router-dom";
 import Routing from "./utils/Routing";
 const App = () => {
   return (
-    <div >
+    < >
       <Nav />
       <Routing />
-    </div>
+    </>
   );
 };
 
