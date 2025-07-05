@@ -10,7 +10,7 @@ import{Route ,Routes,Navigate} from "react-router-dom"
 const Routing = () => {
   return (
     
-      <Routes basename="/TrackBill">
+      <Routes >
         <Route path="/" element={<Navigate to="/dashboard" replace />}></Route>
         <Route path="/dashboard" element={<DashBoard/>}></Route>
         <Route path="/add" element={<AddReceipts/>}></Route>
