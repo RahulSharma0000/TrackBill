@@ -16,7 +16,7 @@ const Nav = () => {
       <div className="flex  px-4 sm:px-10 justify-between items-center w-full ">
         <h1 className="text-2xl text-blue-600 font-bold ">
           {" "}
-          <img className="w-40 scale-110" src="/Logo.jpg" alt="" />
+          <img className="w-40 scale-110" src="/TrackBill/public/Logo.jpg" alt="" />
         </h1>
       <div className="hidden md:flex gap-10 font-medium">
   <NavLink to="/dashboard" className={navLinkClass}>Dashboard</NavLink>
