@@ -6,10 +6,11 @@ import Routing from "./utils/Routing";
 
 const App = () => {
   return (
-    <BrowserRouter basename="/TrackBill/">
-      <Nav />
-      <Routing  />
-    </BrowserRouter>
+  <> 
+     <Nav />
+      <Routing  /> </>
+   
+    
   );
 };
 
