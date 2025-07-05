@@ -1,7 +1,8 @@
 {
-  "homepage": "https://rahulsharma0000.github.io/TrackBill",
+  
   "name": "trackbill",
   "private": true,
+  "homepage": "https://rahulsharma0000.github.io/TrackBill",
   "version": "0.0.0",
   "type": "module",
   "scripts": {
@@ -11,6 +12,7 @@
     "preview": "vite preview",
     "predeploy": "npm run build",
     "deploy": "gh-pages -d build"
+
   },
   "dependencies": {
     "@heroicons/react": "^2.2.0",
